@@ -74,5 +74,5 @@ e=$(date +%s)
 echo "[Time Taken] $(($e-$s))"
 
 
-#rm $uuid/*
-#rmdir $uuid
+rm $uuid/*
+rmdir $uuid
