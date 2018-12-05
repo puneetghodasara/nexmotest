@@ -1,16 +1,26 @@
 #!/bin/bash
 
+apiKey=$1
+apiSecret=$2
+
+if [[ $apiKey == "" || $apiSecret == "" ]]
+then
+	echo "Provide api-key and api-secret as arguments."
+	exit -1
+fi
+
+
 ####################################
 # Get All countries by one of the API
 ####################################
-countries=$(curl -sG 'https://rest.nexmo.com/account/get-full-pricing/outbound/sms' -d "api_key=8f90f30e" -d "api_secret=tfGagpCuHyGHy1Cq" -d "type=sms" | \
+countries=$(curl -sG 'https://rest.nexmo.com/account/get-full-pricing/outbound/sms' -d "api_key=$apiKey" -d "api_secret=$apiSecret" -d "type=sms" | \
        	jq .countries[].countryCode | sed "s/\"//g" | \
 	sort -ui)
 echo "Country codes are " $countries
 
 # Create Temp directory to store pricing JSON files
 uuid=$(date +%s)
-echo "Generated UUID is " $uuid
+echo "Generated Temp Directory is " $uuid
 mkdir -p $uuid
 
 ####################################

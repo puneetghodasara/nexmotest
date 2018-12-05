@@ -19,13 +19,22 @@ public class Driver {
     public static void main(String[] args) throws Exception {
 
 
+        if(args == null || args.length !=2 ){
+            System.err.println("Provide api-key and api-secret as arguments.");
+            System.exit(-1);
+        }
+
+        final String apiKey = args[0];
+        final String apiSecret = args[1];
+
+
 //        final String[] isoCountries = Locale.getISOCountries();
 //        Arrays.stream(isoCountries).forEach(System.out::println);
 
         // NOTE : Do not hard code or expose api-key and api-secret
         final ModifiedNexmoClient modifiedNexmoClient = new ModifiedNexmoClient.Builder()
-                .apiKey("8f90f30e")
-                .apiSecret("tfGagpCuHyGHy1Cq")
+                .apiKey(apiKey)
+                .apiSecret(apiSecret)
                 .build();
         final PriceClient priceClient = modifiedNexmoClient.getPrice();
 
